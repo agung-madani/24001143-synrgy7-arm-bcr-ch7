@@ -1,4 +1,3 @@
-````md
 # Binar Car Rental REACT Project
 
 This project is a full-stack application with both frontend and backend services.
@@ -15,7 +14,6 @@ To run the backend, navigate to the `backend/` directory and run:
 npm install
 npm start
 ```
-````
 
 This will start the backend server.
 
@@ -38,6 +36,3 @@ This will start the frontend development server.
 
 [MIT](https://choosealicense.com/licenses/mit/)
 
-```
-
-```
