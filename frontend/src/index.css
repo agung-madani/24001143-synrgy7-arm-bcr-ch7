@@ -1,0 +1,56 @@
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* Button Green */
+  .btn-green {
+    @apply bg-limegreen-04 text-white px-4 py-2 font-bold rounded-sm;
+  }
+  .btn-green:hover:focus:active {
+    @apply bg-limegreen-05;
+  }
+  .bi-check {
+    @apply bg-darkblue-01 rounded-full m-auto text-2xl text-darkblue-05 inline-flex mb-3;
+  }
+  .bi-hand-thumbs-up,
+  .bi-tag,
+  .bi-clock,
+  .bi-award {
+    @apply rounded-full m-auto text-base inline-flex text-white p-2;
+  }
+  .slide {
+    @apply bg-[#F1F3FF] p-6 lg:p-12 overflow-auto h-[372px] xl:w-[619px] lg:h-[270px] m-auto m-6;
+  }
+  .profile-picture {
+    @apply rounded-full w-[80px] h-[80px] mb-6 lg:mb-0;
+  }
+  .bi-star-fill {
+    @apply text-alrt-yellow;
+  }
+  .bi-chevron-right,
+  .bi-chevron-left {
+    transition: background-color 0.3s ease;
+    @apply rounded-full m-2 text-base border p-2 cursor-pointer hover:bg-limegreen-03 hover:text-white active:bg-limegreen-04;
+  }
+  .bi-facebook,
+  .bi-instagram,
+  .bi-twitter,
+  .bi-envelope,
+  .bi-twitch {
+    /* border-radius: 50%;
+      display: inline-flex;
+      font-size: 24px;
+      padding: 7px;
+      color: var(--neutral01);
+      margin-right: 10px;
+      background: var(--darkblue04); */
+    @apply rounded-full inline-flex text-2xl p-2 text-white bg-darkblue-04;
+  }
+  .bi-people-fill,
+  .bi-gear-fill,
+  .bi-calendar {
+    @apply text-neutral-03 text-xl;
+  }
+}
