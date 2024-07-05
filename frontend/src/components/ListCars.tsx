@@ -1,7 +1,6 @@
 import "../index.css";
 import { CarsContext, Car } from "../context/CarsContext";
 import { useContext } from "react";
-import { AxiosRequestConfig } from "axios";
 import { useNavigate } from "react-router-dom";
 
 const ListCars = () => {
@@ -21,7 +20,6 @@ const ListCars = () => {
     setShowAddCars,
     setSuccessMessage,
     handleDelete,
-    carToDelete,
     showEditCars,
     setShowEditCars,
   } = useContext(CarsContext);
@@ -60,15 +58,11 @@ const ListCars = () => {
   const onClickDelete = () => {
     setSuccessMessage("");
     if (handleDelete) {
-      handleDelete(
-        carToDelete as AxiosRequestConfig<{
-          headers: { Authorization: string };
-        }>
-      );
+      handleDelete();
     }
   };
 
-  const handleEditPage = (id: String) => {
+  const handleEditPage = (id: string) => {
     setShowListCars(false);
     setShowAddCars(false);
     setShowEditCars(true);
@@ -119,7 +113,7 @@ const ListCars = () => {
                 <div className="py-12 px-16">
                   <div className="p-6">
                     <img
-                      src="https://s3-alpha-sig.figma.com/img/61d5/c607/9b0783eff0746faff42854124b28e16c?Expires=1719187200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=igb8zzyLWjbozpF~gn30AHD7wk3eyCr0xhuX8ocnnFKguJRD2Cn~PZkQkBfUVDP-0~0QzJye2wgFTAQ19kyoBSK79iRAO~GLVlPhxS~rGM7rXSnBgR898AbJfy-fgFo6ABt1nskKeCSHRKCDTlpoMFYWGiea9l6~Nvs~EyJ~lBhJ4mwCxaRCu09PHL3KbOWOeabVapcUisFPI1DwNVbGpJDKL-OQYpGIWncl6kgPlLRtTt9rowRGsSRl6LDWSBg843AQ~AQZ2HaOSNjfg5SstfdI~Oo1GimqcuWSynf0g-WhRwaExWenMQhrfCkHpNvAyreNP14a8opSYtXI9FEfhg__"
+                      src="./images/car_cloud.png"
                       alt="car illustration"
                       className="w-48 mx-auto"
                     />

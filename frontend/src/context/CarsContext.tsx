@@ -1,5 +1,10 @@
 import React, { createContext, useState, useEffect, ReactNode } from "react";
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
+
+export interface loginData {
+  email: string;
+  password: string;
+}
 
 export interface Car {
   id: string;
@@ -20,15 +25,40 @@ export interface Car {
   withDriver: boolean;
 }
 
-interface CarsContextType {
+export interface CarData {
+  plate: string;
+  model: string;
+  manufacture: string;
+  image?: File | string | null;
+  rentPerDay: number;
+  capacity: number;
+  description: string;
+  availableAt: Date | null;
+  transmission: string;
+  available: boolean;
+  type: string;
+  year: number;
+  options: string[];
+  specs: string[];
+  withDriver: boolean;
+}
+
+export interface Filters {
+  date?: string;
+  pickupTime?: string;
+  passengerCount?: number;
+  withDriver?: string;
+}
+
+export interface CarsContextType {
   cars: Car[];
-  setFilters?: React.Dispatch<React.SetStateAction<{}>> | undefined;
+  setFilters?: React.Dispatch<React.SetStateAction<Filters>> | undefined;
   successMessage: string;
   setSuccessMessage: React.Dispatch<React.SetStateAction<string>>;
   errorMessage: string;
   setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
-  addCar: (carData: any) => Promise<void>;
-  updateCar: (formData: any, id: string) => Promise<void>;
+  addCar: (carData: FormData) => Promise<void>;
+  updateCar: (formData: FormData, id: string) => Promise<void>;
   handleDelete: () => Promise<void>;
   showAvailableCars: boolean;
   setShowAvailableCars: React.Dispatch<React.SetStateAction<boolean>>;
@@ -90,7 +120,7 @@ const CarsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showEditCars, setShowEditCars] = useState(false);
   const [showAddCars, setShowAddCars] = useState(false);
-  const [showListCars, setShowListCars] = useState(false);
+  const [showListCars, setShowListCars] = useState(true);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [carToDelete, setCarToDelete] = useState<Car | null>(null);
   const [showAvailableCars, setShowAvailableCars] = useState(true);
@@ -98,12 +128,7 @@ const CarsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [cars, setCars] = useState<Car[]>([]);
   const [successMessage, setSuccessMessage] = useState("");
   const [previewImage, setPreviewImage] = useState<string | null>(null);
-  const [filters, setFilters] = useState<{
-    date?: string;
-    pickupTime?: string;
-    passengerCount?: number;
-    withDriver?: string;
-  }>({});
+  const [filters, setFilters] = useState<Filters>({});
 
   useEffect(() => {
     const { date, pickupTime, passengerCount, withDriver } = filters;
@@ -129,7 +154,7 @@ const CarsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
             available: boolean;
             availableAt: typeof date;
             capacity: number;
-            withDriver: any;
+            withDriver: boolean;
           }) =>
             car.available === true &&
             car.withDriver === convertedwithDriver &&
@@ -152,7 +177,7 @@ const CarsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       });
   }, [filters]);
 
-  const addCar = async (carData: any) => {
+  const addCar = async (carData: FormData) => {
     try {
       const headers = localStorage.getItem("tokenBinar")
         ? {
@@ -178,7 +203,7 @@ const CarsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     }
   };
 
-  const updateCar = async (formData: any, id: string) => {
+  const updateCar = async (formData: FormData, id: string) => {
     try {
       const headers = localStorage.getItem("tokenBinar")
         ? {

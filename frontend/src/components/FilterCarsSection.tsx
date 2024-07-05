@@ -1,11 +1,9 @@
 import "../index.css";
-import NavBar from "./NavBar";
-import Footer from "./Footer";
-import { CarsContext } from "../context/CarsContext";
+import { CarsContext, Filters } from "../context/CarsContext";
 import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-const FindCarPage = () => {
+const FilterCarsSection = () => {
   const { cars, setFilters } = useContext(CarsContext);
   const {
     register,
@@ -13,7 +11,7 @@ const FindCarPage = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: Filters) => {
     console.log(data);
     if (setFilters) {
       setFilters(data);
@@ -57,52 +55,7 @@ const FindCarPage = () => {
     });
   };
   return (
-    <div>
-      <NavBar />
-      <section
-        className="hero-section relative p-6 lg:py-100 bg-[#F1F3FF]"
-        id="hero-section"
-      >
-        <div className="container max-w-6xl mx-auto">
-          <div className="lg:flex">
-            <div className="mb-[200px] lg:mb-0">
-              <p className="font-bold text-4xl mw-full max-w-[568px] mb-5">
-                Sewa & Rental Mobil Terbaik di kawasan (Lokasimu)
-              </p>
-              <p className="text-sm font-light mw-full max-w-[463px] mb-5">
-                Selamat datang di Binar Car Rental. Kamis menyediakan mobil
-                kualitas terbaik dengan harga terjangkau. Selalu siap melayani
-                kebutuhanmu untuk sewa mobil selama 24 jam.
-              </p>
-            </div>
-
-            <img
-              src="./images/img_car.png"
-              alt="car"
-              className="block absolute right-0 bottom-0 lg:block"
-              style={{ width: "50%" }}
-            />
-            <img
-              src="./images/img_car.png"
-              alt="car"
-              className="hidden lg:hidden sm:block absolute right-0 bottom-0"
-              style={{ width: "60%" }}
-            />
-            <img
-              src="./images/img_car.png"
-              alt="car"
-              className="hidden sm:hidden mobile:block absolute right-0 bottom-0"
-              style={{ width: "70%" }}
-            />
-            <img
-              src="./images/img_car.png"
-              alt="car"
-              className="block lg:hidden absolute right-0 bottom-0"
-              style={{ width: "90%" }}
-            />
-          </div>
-        </div>
-      </section>
+    <>
       <main className="relative mb-96 lg:mb-20">
         <div className="absolute top-0 left-0 right-0 mx-auto mt-[-50px] lg:w-[1047px] px-6 lg:px-0">
           <form
@@ -210,9 +163,8 @@ const FindCarPage = () => {
           id="cars-container"
         ></div>
       </div>
-      <Footer />
-    </div>
+    </>
   );
 };
 
-export default FindCarPage;
+export default FilterCarsSection;

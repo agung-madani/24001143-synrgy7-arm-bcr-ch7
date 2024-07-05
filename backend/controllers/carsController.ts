@@ -171,20 +171,6 @@ class CarsController {
           withDriver,
         } = req.body;
 
-        rentPerDay = parseInt(rentPerDay);
-        capacity = parseInt(capacity);
-        year = parseInt(year);
-        available = available === "true" ? true : false;
-        withDriver = withDriver === "true" ? true : false;
-        options = options.split(",").map((option: string) => option.trim());
-        specs = specs.split(",").map((specs: string) => specs.trim());
-
-        if (isNaN(rentPerDay) || isNaN(capacity) || isNaN(year)) {
-          return res.status(400).json({
-            message: "rentPerDay, capacity, and year must be valid numbers.",
-          });
-        }
-
         // Update only the fields that are provided
         plate = plate || existingCar.plate;
         manufacture = manufacture || existingCar.manufacture;
@@ -201,6 +187,21 @@ class CarsController {
         options = options || existingCar.options;
         specs = specs || existingCar.specs;
         withDriver = withDriver || existingCar.withDriver;
+
+        rentPerDay = parseInt(rentPerDay);
+        capacity = parseInt(capacity);
+        year = parseInt(year);
+        available = available === "true" ? true : false;
+        withDriver = withDriver === "true" ? true : false;
+
+        options = options.split(",").map((option: string) => option.trim());
+        specs = specs.split(",").map((specs: string) => specs.trim());
+
+        if (isNaN(rentPerDay) || isNaN(capacity) || isNaN(year)) {
+          return res.status(400).json({
+            message: "rentPerDay, capacity, and year must be valid numbers.",
+          });
+        }
 
         const result = await CarsService.updateCar(
           id,

@@ -1,5 +1,5 @@
 const slider = () => {
-  // @ts-ignore
+  // @ts-expect-error This instance is initialized with custom options not fully typed
   const sliderInstance = tns({
     container: ".my-slider",
     items: 3,
